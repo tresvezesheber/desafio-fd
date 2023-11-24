@@ -1,7 +1,6 @@
-package br.com.hebio.desafiofd;
+package br.com.hebio.desafiofd.controller;
 
 import br.com.hebio.desafiofd.model.User;
-import br.com.hebio.desafiofd.repository.UserRepository;
 import br.com.hebio.desafiofd.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
