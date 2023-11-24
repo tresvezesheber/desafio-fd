@@ -2,6 +2,7 @@ package br.com.hebio.desafiofd;
 
 import br.com.hebio.desafiofd.model.User;
 import br.com.hebio.desafiofd.repository.UserRepository;
+import br.com.hebio.desafiofd.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,17 +15,17 @@ import java.util.List;
 @RequestMapping("/")
 public class IndexController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping()
     public ResponseEntity<List<User>> listAllUsers() {
-        List<User> usersList = userRepository.findAll();
+        List<User> usersList = userService.listAll();
         return ResponseEntity.ok(usersList);
     }
 
     @PostMapping
     public ResponseEntity<User> saveUser(@RequestBody @Valid User user) {
-        User userSaved = userRepository.save(user);
+        User userSaved = userService.saveUser(user);
         return ResponseEntity.ok(userSaved);
     }
 
