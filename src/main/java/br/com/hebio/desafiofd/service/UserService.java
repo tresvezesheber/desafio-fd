@@ -22,13 +22,13 @@ public class UserService {
     }
 
     public User saveUser(UserRecord userRecord) {
-        verifyIfUserAlreadyExtists(userRecord.email());
+        verifyIfEmailAlreadyExtists(userRecord.email());
         verifyPassword(userRecord.password(), userRecord.passwordConfirmation());
         User user = new User(userRecord.name(), userRecord.email(), userRecord.password());
         return userRepository.save(user);
     }
 
-    public void verifyIfUserAlreadyExtists(String email) {
+    public void verifyIfEmailAlreadyExtists(String email) {
         userRepository.findByEmail(email)
                 .ifPresent(user -> {
                     throw new EmailAlreadyExistsException("This email already exists");
@@ -47,7 +47,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         if (!user.getEmail().equals(userRecord.email())) {
-            verifyIfUserAlreadyExtists(userRecord.email());
+            verifyIfEmailAlreadyExtists(userRecord.email());
         }
 
         verifyPassword(userRecord.password(), userRecord.passwordConfirmation());
