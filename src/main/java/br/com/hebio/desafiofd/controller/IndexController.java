@@ -30,5 +30,11 @@ public class IndexController {
         return ResponseEntity.ok(userSaved);
     }
 
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody @Valid UserRecord userRecord) {
+        User userUpdated = userService.updateUser(userId, userRecord);
+        return ResponseEntity.ok(userUpdated);
+    }
+
 
 }

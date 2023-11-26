@@ -2,6 +2,7 @@ package br.com.hebio.desafiofd.exceptionhandler;
 
 import br.com.hebio.desafiofd.exception.EmailAlreadyExistsException;
 import br.com.hebio.desafiofd.exception.PasswordConfirmationException;
+import br.com.hebio.desafiofd.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -59,6 +60,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         detalheDoProblema.setTitle("The Passwords must be equals");
         detalheDoProblema.setDetail(e.getMessage());
         detalheDoProblema.setType(URI.create(BASEURL + "/erros/passwords-must-be-equals"));
+
+        return detalheDoProblema;
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ProblemDetail handleUserNotFound(UserNotFoundException e) {
+        ProblemDetail detalheDoProblema = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        detalheDoProblema.setTitle("User not found");
+        detalheDoProblema.setDetail(e.getMessage());
+        detalheDoProblema.setType(URI.create(BASEURL + "/erros/user-not-found"));
 
         return detalheDoProblema;
     }
