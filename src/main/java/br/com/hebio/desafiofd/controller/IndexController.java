@@ -5,6 +5,9 @@ import br.com.hebio.desafiofd.model.UserRecord;
 import br.com.hebio.desafiofd.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +22,8 @@ public class IndexController {
     private final UserService userService;
 
     @GetMapping()
-    public ResponseEntity<List<User>> listAllUsers() {
-        List<User> usersList = userService.listAll();
+    public ResponseEntity<Page<User>> listAllUsers(@PageableDefault(size = 6, sort = {"name"}) Pageable pagination) {
+        Page<User> usersList = userService.listAll(pagination);
         return ResponseEntity.ok(usersList);
     }
 

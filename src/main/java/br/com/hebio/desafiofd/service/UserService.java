@@ -7,6 +7,8 @@ import br.com.hebio.desafiofd.model.User;
 import br.com.hebio.desafiofd.model.UserRecord;
 import br.com.hebio.desafiofd.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public List<User> listAll() {
-        return userRepository.findAll();
+    public Page<User> listAll(Pageable pagination) {
+        return userRepository.findAll(pagination);
     }
 
     public User saveUser(UserRecord userRecord) {
