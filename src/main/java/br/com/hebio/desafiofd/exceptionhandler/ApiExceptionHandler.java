@@ -55,7 +55,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(PasswordConfirmationException.class)
-    public ProblemDetail handlePPasswordConfirmation(PasswordConfirmationException e) {
+    public ProblemDetail handlePasswordConfirmation(PasswordConfirmationException e) {
         ProblemDetail detalheDoProblema = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         detalheDoProblema.setTitle("The Passwords must be equals");
         detalheDoProblema.setDetail(e.getMessage());
